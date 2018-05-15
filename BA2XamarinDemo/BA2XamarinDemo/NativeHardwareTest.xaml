@@ -3,15 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BA2XamarinDemo.NativeHardwareTest">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Camera Access In Xamarin forms"/>
+        <Grid>
             <Button Text="Take a Photo"    
+            Clicked="Kamera_Button_Clicked"
                     x:Name="takePhoto"    
-                    BackgroundColor="Fuchsia"/>
-            <Button Text="Pick a Photo"    
-                    x:Name="pickPhoto"    
-                    BackgroundColor="Blue"/>
-            <Image x:Name="image"/>
-        </StackLayout>
+                    BackgroundColor="Gray"
+                    TextColor="White"
+                    Grid.Row="1"/>
+            <Image x:Name="image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

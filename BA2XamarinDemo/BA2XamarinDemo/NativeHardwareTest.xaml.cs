@@ -1,4 +1,5 @@
 ﻿using Plugin.Media;
+using Plugin.Media.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,72 +14,40 @@ namespace BA2XamarinDemo
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NativeHardwareTest : ContentPage
     {
-        public NativeHardwareTest()
-        {
-            InitializeComponent();
-            takePhoto();
-            pickPhotoFromFileSystem();
-            
-        }
+        private String filePath;
 
-        public void takePhotoAndSave()
+        //public NativeHardwareTest()
+        //{
+        //    CameraButton.Clicked += CameraButton_Clicked;
+        //}
+
+        private async void Kamera_Button_Clicked(object sender, EventArgs e)
         {
-            takePhoto.Clicked += async (sender, args) =>
+
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
             {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
 
-                if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
-                {
-                    await DisplayAlert("No Camera", ":( No camera avaialble.", "OK");
-                    return;
-                }
-
-                var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-                {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium,
-                    Directory = "Sample",
-                    Name = "test.jpg"
-                });
-
-                if (file == null)
-                    return;
-
-                await DisplayAlert("File Location", file.Path, "OK");
-
-                image.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
-            };
-        }
-
-        public void pickPhotoFromFileSystem()
-        {
-            pickPhoto.Clicked += async (sender, args) =>
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
             {
-                if (!CrossMedia.Current.IsPickPhotoSupported)
-                {
-                    await DisplayAlert("Photos Not Supported", ":( Permission not granted to photos.", "OK");
-                    return;
-                }
-                var file = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
-                {
-                    PhotoSize = Plugin.Media.Abstractions.PhotoSize.Medium
-                });
+                Directory = "Pictures",
+                Name = DateTime.Now + "_demo.jpg"
+            });
 
-
-                if (file == null)
-                    return;
-
-                image.Source = ImageSource.FromStream(() =>
-                {
-                    var stream = file.GetStream();
-                    file.Dispose();
-                    return stream;
-                });
-            };
+            if (file == null)
+                return;
+            this.filePath = file.Path;
+            OnAppearing();
         }
 
+        async protected override void OnAppearing()
+        {
+            //show picture
+            image.Source = ImageSource.FromFile(filePath);
+        }
     }
 }

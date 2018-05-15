@@ -1,12 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BA2XamarinDemo.PerformancePage">
+             x:Class="BA2XamarinDemo.PerformancePage"
+             xmlns:local="clr-namespace:BA2XamarinDemo">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+        <StackLayout x:Name="layout">
+            <Label Text="Performance Test!"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand" ></Label>
+            <Label x:Name="Time"
+                   Text="Running Time: "></Label>
+            <Button Text="Start PerformanceTest"
+                        Clicked="StartPerformanceTest_Clicked"></Button>
+            <ListView x:Name="listView"></ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
