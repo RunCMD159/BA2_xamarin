@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:androidSpecific="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              x:Class="BA2XamarinDemo.PerformancePage"
              xmlns:local="clr-namespace:BA2XamarinDemo">
     <ContentPage.Content>
@@ -12,7 +13,8 @@
                    Text="Running Time: "></Label>
             <Button Text="Start PerformanceTest"
                         Clicked="StartPerformanceTest_Clicked"></Button>
-            <ListView x:Name="listView"></ListView>
+            <ListView x:Name="listView"
+                      androidSpecific:ListView.IsFastScrollEnabled="True"></ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

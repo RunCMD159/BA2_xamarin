@@ -34,19 +34,14 @@ namespace BA2XamarinDemo
 
         private void endPerformanceTestOnLastItem(object sender, ItemVisibilityEventArgs e)
         {
-            if (e.Item.ToString().Equals(this.performanceData.Last()))
-            {
-
-                this.stopWatch.Stop();
-                this.Time.Text += this.stopWatch.ElapsedMilliseconds + " ms";
-            }
-            else if (scrollToBottom)
-            {
-                scrollToBottom = false;
-                System.Diagnostics.Debug.WriteLine("SCROLL TO BOTTOM");
-                int indexToScrollTo = Array.IndexOf(performanceData, performanceData.Last());
-                listView.ScrollTo(performanceData[indexToScrollTo], ScrollToPosition.MakeVisible, true);
-            }
+            this.Time.Text = "Running Time: " + this.stopWatch.ElapsedMilliseconds + " ms";
+            //else if (scrollToBottom)
+            //{
+            //    scrollToBottom = false;
+            //    System.Diagnostics.Debug.WriteLine("SCROLL TO BOTTOM");
+            //    int indexToScrollTo = Array.IndexOf(performanceData, performanceData.Last());
+            //    listView.ScrollTo(performanceData[indexToScrollTo], ScrollToPosition.MakeVisible, true);
+            //}
         }
 
         public void StartPerformanceTest_Clicked(object sender, EventArgs e)
