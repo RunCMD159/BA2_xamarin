@@ -14,34 +14,18 @@ namespace BA2XamarinDemo
     public partial class PerformancePage : ContentPage
     {
         private String[] performanceData;
-        private bool scrollToBottom = true;
         private Stopwatch stopWatch;
+        private static int DATA_LENGTH = 10000;
 
         public PerformancePage()
         {
             InitializeComponent();
-            int dataLength = 10000;
-            performanceData = new String[dataLength];
-            Random random = new Random();
-            for (int i = 0; i < dataLength; i++)
-            {
-                String data = "Test String " + random.Next(0, dataLength + 1);
-                performanceData[i] = data;
-            }
-            this.listView.ItemAppearing += endPerformanceTestOnLastItem;
-
+            this.initPerformanceData();
         }
 
         private void endPerformanceTestOnLastItem(object sender, ItemVisibilityEventArgs e)
         {
             this.Time.Text = "Running Time: " + this.stopWatch.ElapsedMilliseconds + " ms";
-            //else if (scrollToBottom)
-            //{
-            //    scrollToBottom = false;
-            //    System.Diagnostics.Debug.WriteLine("SCROLL TO BOTTOM");
-            //    int indexToScrollTo = Array.IndexOf(performanceData, performanceData.Last());
-            //    listView.ScrollTo(performanceData[indexToScrollTo], ScrollToPosition.MakeVisible, true);
-            //}
         }
 
         public void StartPerformanceTest_Clicked(object sender, EventArgs e)
@@ -51,6 +35,26 @@ namespace BA2XamarinDemo
             this.listView.ItemsSource = this.performanceData;
         }
 
+        public void ResetTest_Clicked(object sender, EventArgs e)
+        {
+            this.listView.ItemsSource = null;
+            this.listView.ItemAppearing += null;
+            this.Time.Text = "Running Time: 0 ms";
+            this.initPerformanceData();
+
+        }
+
+        private void initPerformanceData()
+        {
+            performanceData = new String[DATA_LENGTH];
+            Random random = new Random();
+            for (int i = 0; i < DATA_LENGTH; i++)
+            {
+                String data = "Test String " + random.Next(0, DATA_LENGTH + 1);
+                performanceData[i] = data;
+            }
+            this.listView.ItemAppearing += endPerformanceTestOnLastItem;
+        }
     }
 
 

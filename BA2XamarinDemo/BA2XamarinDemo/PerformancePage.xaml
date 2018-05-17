@@ -11,7 +11,9 @@
                 HorizontalOptions="CenterAndExpand" ></Label>
             <Label x:Name="Time"
                    Text="Running Time: "></Label>
-            <Button Text="Start PerformanceTest"
+            <Button Text="Test zurücksetzen"
+                        Clicked="ResetTest_Clicked"></Button>
+            <Button Text="Test starten"
                         Clicked="StartPerformanceTest_Clicked"></Button>
             <ListView x:Name="listView"
                       androidSpecific:ListView.IsFastScrollEnabled="True"></ListView>
