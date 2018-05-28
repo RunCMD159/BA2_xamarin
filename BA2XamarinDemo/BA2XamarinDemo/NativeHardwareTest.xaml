@@ -2,15 +2,27 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BA2XamarinDemo.NativeHardwareTest">
-    <ContentPage.Content>
-        <Grid>
-            <Button Text="Take a Photo"    
-            Clicked="Kamera_Button_Clicked"
-                    x:Name="takePhoto"    
-                    BackgroundColor="Gray"
-                    TextColor="White"
-                    Grid.Row="1"/>
-            <Image x:Name="image" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="3"/>
-        </Grid>
-    </ContentPage.Content>
+    <ScrollView>
+        <StackLayout x:Name="layout">
+            <Label
+              Text="Geolocation Demo"
+              HorizontalTextAlignment="Center"
+              FontSize="20"/>
+            <Button Text="Location anzeigen" Clicked="GetGeolocation_Clicked"></Button>
+            <Label HorizontalTextAlignment="Center"
+              FontSize="20"
+           x:Name="LabelGeolocation"
+                   Text="Geodaten"/>
+
+            <Label
+              Text="Kamera Demo"
+              HorizontalTextAlignment="Center"
+              FontSize="20"/>
+            <Image
+              x:Name="image"
+              BackgroundColor="#F0F0F0"/>
+            <Button Text="Take Photo"
+                        Clicked="TakePhoto_Clicked"></Button>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
