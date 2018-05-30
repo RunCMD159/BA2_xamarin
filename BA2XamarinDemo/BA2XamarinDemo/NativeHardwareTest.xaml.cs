@@ -1,4 +1,5 @@
-﻿using Plugin.Geolocator;
+﻿using PCLStorage;
+using Plugin.Geolocator;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.Permissions;
@@ -17,10 +18,14 @@ namespace BA2XamarinDemo
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NativeHardwareTest : ContentPage
     {
-        private String filePath;
+        IFolder rootFolder;
+        String fileText = "Text text";
+
         public NativeHardwareTest()
         {
             InitializeComponent();
+            rootFolder = FileSystem.Current.LocalStorage;
+            this.createFolder();
         }
 
         async void TakePhoto_Clicked(object sender, System.EventArgs e)
@@ -85,5 +90,32 @@ namespace BA2XamarinDemo
                 LabelGeolocation.Text = "Error: " + ex;
             }
         }
+
+        async void createFolder()
+        {
+            rootFolder = await rootFolder.CreateFolderAsync("testdir",
+                CreationCollisionOption.OpenIfExists);
+            IFile file = await rootFolder.CreateFileAsync("testFile.txt",
+                CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync(fileText);
+            fileTextView.Text = fileText;
+        }
+
+        async void Save_Clicked(object sender, System.EventArgs e)
+        {
+            fileText = fileTextView.Text;
+            IFile file = await rootFolder.CreateFileAsync("testFile.txt",
+                CreationCollisionOption.ReplaceExisting);
+            await file.WriteAllTextAsync(fileText);
+        }
+
+        async void Load_Clicked(object sender, System.EventArgs e)
+        {
+            IFile file = await rootFolder.GetFileAsync("testFile.txt");
+            fileText = await file.ReadAllTextAsync();
+            fileTextView.Text = fileText;
+        }
+
+
     }
 }

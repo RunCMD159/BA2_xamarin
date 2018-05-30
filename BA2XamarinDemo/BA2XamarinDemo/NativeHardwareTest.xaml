@@ -23,6 +23,15 @@
               BackgroundColor="#F0F0F0"/>
             <Button Text="Take Photo"
                         Clicked="TakePhoto_Clicked"></Button>
+            <Label
+              Text="Dateisystem Demo"
+              HorizontalTextAlignment="Center"
+              FontSize="20"/>
+            <Button Text="Save"
+                    Clicked="Save_Clicked"></Button>
+            <Button Text="Load"
+                    Clicked="Load_Clicked"></Button>
+            <Editor x:Name="fileTextView"></Editor>
         </StackLayout>
     </ScrollView>
 </ContentPage>
