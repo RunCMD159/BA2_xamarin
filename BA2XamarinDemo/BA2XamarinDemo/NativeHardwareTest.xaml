@@ -8,7 +8,7 @@
               Text="Geolocation Demo"
               HorizontalTextAlignment="Center"
               FontSize="20"/>
-            <Button Text="Location anzeigen" Clicked="GetGeolocation_Clicked"></Button>
+            <Button Text="Geodaten anzeigen" Clicked="GetGeolocation_Clicked"></Button>
             <Label HorizontalTextAlignment="Center"
               FontSize="20"
            x:Name="LabelGeolocation"
@@ -21,15 +21,15 @@
             <Image
               x:Name="image"
               BackgroundColor="#F0F0F0"/>
-            <Button Text="Take Photo"
+            <Button Text="Foto aufnehmen"
                         Clicked="TakePhoto_Clicked"></Button>
             <Label
               Text="Dateisystem Demo"
               HorizontalTextAlignment="Center"
               FontSize="20"/>
-            <Button Text="Save"
+            <Button Text="Speichern"
                     Clicked="Save_Clicked"></Button>
-            <Button Text="Load"
+            <Button Text="Laden"
                     Clicked="Load_Clicked"></Button>
             <Editor x:Name="fileTextView"></Editor>
         </StackLayout>

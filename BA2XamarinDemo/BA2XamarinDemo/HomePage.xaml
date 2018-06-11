@@ -4,9 +4,10 @@
              x:Class="BA2XamarinDemo.HomePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label x:Name="description"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   LineBreakMode="WordWrap"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
